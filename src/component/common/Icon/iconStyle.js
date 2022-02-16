@@ -9,7 +9,7 @@ export const IconStyle = createGlobalStyle`
   }
 
   .iconfont {
-    font-family: "iconfont" !important;
+    font-family: "iconfont", serif !important;
     font-size: 16px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;

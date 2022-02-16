@@ -23,6 +23,8 @@ module.exports = {
     ],
     "rules": {
         "no-unused-expressions": 0,
-        "no-self-assign": 0
+        "no-self-assign": 0,
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
     }
 }
