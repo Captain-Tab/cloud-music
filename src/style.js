@@ -53,4 +53,8 @@ export const GlobalStyle = createGlobalStyle`
 		text-decoration: none;
 		color: #fff;
 	}
+    #root, #App {
+      height: 100%;
+      width: 100%;
+    }
 `;
