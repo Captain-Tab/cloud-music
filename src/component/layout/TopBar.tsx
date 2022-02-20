@@ -19,7 +19,7 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
                 </TopContent>
 
                 <Tab>
-                    <NavLink to={'/recommend'} >
+                    <NavLink to={'/'} >
                         <TabItem className={cx({'selected': true})}>
                             <span>推荐</span>
                         </TabItem>
@@ -37,7 +37,9 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
                 </Tab>
             </TopWrapper>
 
-            { props. children}
+            <div className={'showArea'}>
+                { props. children}
+            </div>
         </Main>
     )
 }
@@ -46,14 +48,18 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
 const Main = styled.div`
   height: 100%;
   width: 100%;
+  > .showArea {
+    height: calc(100% - 105px);
+  }
 `
 
 const TopWrapper = styled.div`
   width: 100%;  
-  height: 20%;
+  height: 105px;
 `
 
 const TopContent = styled.div`
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -71,7 +77,7 @@ const TopContent = styled.div`
 `
 
 const Tab = styled.div`
-  height: 44px;
+  height: 45px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from './router'
 import store from "./store";
 import { themeCSS } from "./const/global-style";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 
 function App() {
   return (
