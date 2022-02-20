@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Slider from "./Slider";
 import List, { IListDetail } from "./List"
+import Scroll from "../../component/common/scroll/Scroll";
 
 const Recommend = () : JSX.Element => {
     const bannerList: {imageUrl: string}[] = [1, 2, 3, 4].map(item => {
@@ -20,7 +21,12 @@ const Recommend = () : JSX.Element => {
     return (
         <Main>
             <Slider list={bannerList}/>
-            <List list={recommendList} />
+            <Content>
+                <h1 className="title"> 推荐歌单 </h1>
+                <Scroll>
+                    <List list={recommendList} />
+                </Scroll>
+            </Content>
         </Main>
     )
 }
@@ -30,4 +36,16 @@ export default React.memo(Recommend)
 const Main = styled.div`
   height: 100%;
   width: 100%;
+`
+const Content = styled.div`
+  position: fixed;
+  top: 225px;
+  bottom: 0;
+  width: 100%;
+  .title {
+    font-weight: 700;
+    padding-left: 6px;
+    font-size: 14px;
+    line-height: 60px;
+  }
 `

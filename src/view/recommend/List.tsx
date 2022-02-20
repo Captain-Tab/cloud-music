@@ -19,7 +19,6 @@ const List = (props: Iprops): JSX.Element | null => {
 
     return (
         <ListWrapper>
-            <h1 className="title"> 推荐歌单 </h1>
             <ShowList>
                 {
                     list.map ((item, index) => {
@@ -47,17 +46,11 @@ export default React.memo (List);
 
 const ListWrapper = styled.div`
   max-width: 100%;
-  .title {
-    font-weight: 700;
-    padding-left: 6px;
-    font-size: 14px;
-    line-height: 60px;
-  }
 `;
 const ShowList = styled.div`
   box-sizing: border-box;
   width: 100%;
-  padding: 10px;
+  padding: 10px 10px 50px 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

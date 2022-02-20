@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import Icon from "../common/Icon/Icon";
 import { NavLink } from "react-router-dom";
@@ -9,6 +9,19 @@ interface Iprops {
 }
 
 const TopBar = (props: Iprops) :JSX.Element =>  {
+    const [select, setSelect] = useState('/')
+    const pathName = new URL(window.location.href).pathname
+
+    // 更新路径变量
+    const routeChange =() => {
+        setSelect(new URL(window.location.href).pathname)
+    }
+
+    // 监听路径参数，更新组件状态
+    useEffect(()=> {
+        routeChange()
+    }, [pathName])
+
     return(
         <Main>
             <TopWrapper>
@@ -19,18 +32,18 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
                 </TopContent>
 
                 <Tab>
-                    <NavLink to={'/'} >
-                        <TabItem className={cx({'selected': true})}>
+                    <NavLink to={'/'}>
+                        <TabItem className={cx({'selected': select === '/'})}>
                             <span>推荐</span>
                         </TabItem>
                     </NavLink>
                     <NavLink to={'/artists'}>
-                        <TabItem className={cx({'selected': true})}>
+                        <TabItem className={cx({'selected': select === '/artists'})}>
                             <span>歌手</span>
                         </TabItem>
                     </NavLink>
                     <NavLink to={'/rank'}>
-                        <TabItem className={cx({'selected': true})}>
+                        <TabItem className={cx({'selected': select === '/rank'})}>
                             <span>排行榜</span>
                         </TabItem>
                     </NavLink>
