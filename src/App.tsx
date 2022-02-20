@@ -5,19 +5,23 @@ import { IconStyle } from "./component/common/Icon/iconStyle";
 import  { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import Router from './router'
+import store from "./store";
 import { themeCSS } from "./const/global-style";
+import {Provider} from "react-redux";
 
 function App() {
   return (
-      <BrowserRouter>
-      <ThemeProvider theme={themeCSS} >
-          <div id="App">
-              <Router />
-              <GlobalStyle />
-              <IconStyle />
-          </div>
-      </ThemeProvider>
-      </BrowserRouter>
+      <Provider store={store}>
+          <BrowserRouter>
+              <ThemeProvider theme={themeCSS} >
+                  <div id="App">
+                      <Router />
+                      <GlobalStyle />
+                      <IconStyle />
+                  </div>
+              </ThemeProvider>
+          </BrowserRouter>
+      </Provider>
   );
 }
 
