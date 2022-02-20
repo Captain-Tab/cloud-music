@@ -54,8 +54,7 @@ const Main = styled.div`
 `
 
 const TopWrapper = styled.div`
-  width: 100%;  
-  height: 105px;
+  width: 100%;
 `
 
 const TopContent = styled.div`

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css';
 import "swiper/css/pagination";
 import SwiperCore, { Pagination, Autoplay} from "swiper";
-SwiperCore.use([Pagination,Autoplay])
+SwiperCore.use([Pagination, Autoplay])
 
 interface Iprops {
     list: {imageUrl: string}[]
