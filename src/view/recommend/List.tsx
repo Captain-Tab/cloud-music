@@ -15,7 +15,6 @@ interface Iprops {
 
 const List = (props: Iprops): JSX.Element | null => {
     const { list } = props
-    console.log('list', props.list)
 
     return (
         <ListWrapper>

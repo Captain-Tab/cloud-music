@@ -12,7 +12,6 @@ interface Iprops {
 
 const Slider = (props: Iprops): JSX.Element | null => {
     const { list } = props
-    console.log('list', props.list)
 
     return (
       list.length > 0 ? (

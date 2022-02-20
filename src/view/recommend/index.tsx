@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Slider from "./Slider";
 import List from "./List"
-import Scroll from "../../component/common/scroll/Scroll";
-import { connect } from "react-redux";
-import { getBannerList,  getRecommendList} from '../../store/recommend/actionCreators'
+import Scroll from "../../component/common/scroll/Scroll"
+import { connect } from "react-redux"
+import { getBannerList, getRecommendList} from '../../store/recommend/actionCreators'
 
 const Recommend = (props: any) : JSX.Element => {
     const { bannerList, recommendList } = props
-    const { getBannerListDt, getRecommendListDt } = props;
+    const { getBannerListDt, getRecommendListDt } = props
     console.log(bannerList, recommendList)
 
     useEffect (() => {
@@ -48,11 +48,11 @@ const mapDispatchToProps = (dispatch: any) => {
         },
         getRecommendListDt () {
             dispatch(getRecommendList());
-        },
+        }
     }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(React.memo (Recommend));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo (Recommend));
 
 const Main = styled.div`
   height: 100%;
