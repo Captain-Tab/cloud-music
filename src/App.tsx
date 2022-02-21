@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { GlobalStyle } from './style';
-import { IconStyle } from "./component/common/Icon/iconStyle";
+import { IconStyle } from "./component/common/icon/iconStyle";
 import  { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import Router from './router'

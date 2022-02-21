@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import Icon from "../common/Icon/Icon";
+import Icon from "../common/icon/Icon";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
 

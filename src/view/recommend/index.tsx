@@ -4,18 +4,23 @@ import Slider from "./Slider";
 import List from "./List"
 import Scroll from "../../component/common/scroll/Scroll"
 import { connect } from "react-redux"
+import { forceCheck } from 'react-lazyload';
 import { getBannerList, getRecommendList} from '../../store/recommend/actionCreators'
+import Loading from "../../component/common/loading";
 
 const Recommend = (props: any) : JSX.Element => {
-    const { bannerList, recommendList } = props
+    const { bannerList, recommendList, enterLoading } = props
     const { getBannerListDt, getRecommendListDt } = props
-    console.log(bannerList, recommendList)
+    // console.log(bannerList, recommendList)
 
-    useEffect (() => {
-        getBannerListDt();
-        getRecommendListDt();
-        //eslint-disable-next-line
-    }, [])
+    useEffect(() => {
+        if(!bannerList.size){
+            getBannerListDt();
+        }
+        if(!recommendList.size){
+            getRecommendListDt();
+        }
+    }, []);
 
     const bannerListJS = bannerList ? bannerList.toJS () : []
     const recommendListJS = recommendList ? recommendList.toJS () :[]
@@ -25,9 +30,10 @@ const Recommend = (props: any) : JSX.Element => {
             <Slider list={bannerListJS}/>
             <Content>
                 <h1 className="title"> 推荐歌单 </h1>
-                <Scroll>
+                <Scroll onScroll={ forceCheck }>
                     <List list={recommendListJS} />
                 </Scroll>
+                { enterLoading ? <Loading/> : null}
             </Content>
         </Main>
     )
@@ -38,6 +44,7 @@ const mapStateToProps = (state: any) => ({
     // 不然每次 diff 比对 props 的时候都是不一样的引用，还是导致不必要的重渲染，属于滥用 immutable
     bannerList: state.getIn(['recommend', 'bannerList']),
     recommendList: state.getIn(['recommend', 'recommendList']),
+    enterLoading: state.getIn (['recommend', 'enterLoading'])
 });
 
 // 映射 dispatch 到 props 上
