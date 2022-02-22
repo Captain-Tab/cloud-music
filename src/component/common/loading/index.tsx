@@ -1,6 +1,17 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
+const Loading = () =>  {
+    return (
+        <LoadingWrapper>
+            <div />
+            <div />
+        </LoadingWrapper>
+    );
+}
+
+export default React.memo(Loading);
+
 const loading = keyframes`
   0%, 100% {
     transform: scale(0.0);
@@ -28,14 +39,3 @@ const LoadingWrapper = styled.div`
     animation-delay: -0.7s;
   }
 `
-
-function Loading()  {
-    return (
-        <LoadingWrapper>
-            <div />
-            <div />
-        </LoadingWrapper>
-    );
-}
-
-export default React.memo(Loading);

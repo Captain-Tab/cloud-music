@@ -6,7 +6,7 @@ interface IProps {
     type: string;
 }
 
-const Icon = (props: IProps): JSX.Element =>  {
+const Index = (props: IProps): JSX.Element =>  {
     const { className, type } = props
     return <i  className={cx({
         [`iconfont icon-${type}`]: true,
@@ -14,5 +14,5 @@ const Icon = (props: IProps): JSX.Element =>  {
     })} />
 }
 
-export default Icon
+export default Index
 

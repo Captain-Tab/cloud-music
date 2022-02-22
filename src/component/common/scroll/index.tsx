@@ -37,7 +37,7 @@ const defaultProps = {
 };
 
 // eslint-disable-next-line react/display-name
-const Scroll = forwardRef((props: Iprops | any, ref) => {
+const Index = forwardRef((props: Iprops | any, ref) => {
     props = { ...defaultProps, ...props}
     const { direction, click, refresh,  bounceTop, bounceBottom } = props;
     const { pullUp, pullDown, onScroll } = props;
@@ -130,7 +130,7 @@ const Scroll = forwardRef((props: Iprops | any, ref) => {
     );
 })
 
-export default Scroll;
+export default Index;
 
 const ScrollContainer = styled.div`
   width: 100%;

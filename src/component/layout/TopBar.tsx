@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import Icon from "../common/icon/Icon";
+import Index from "../common/icon";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
 
@@ -26,9 +26,9 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
         <Main>
             <TopWrapper>
                 <TopContent>
-                    <Icon  className={'customIcon'} type={'menu'}/>
+                    <Index className={'customIcon'} type={'menu'}/>
                     <span>Red Bean Ice</span>
-                    <Icon className={'customIcon'} type={'search'} />
+                    <Index className={'customIcon'} type={'search'} />
                 </TopContent>
 
                 <Tab>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Slider from "./Slider";
 import List from "./List"
-import Scroll from "../../component/common/scroll/Scroll"
+import Index from "../../component/common/scroll"
 import { connect } from "react-redux"
 import { forceCheck } from 'react-lazyload';
 import { getBannerList, getRecommendList} from '../../store/recommend/actionCreators'
@@ -30,9 +30,9 @@ const Recommend = (props: any) : JSX.Element => {
             <Slider list={bannerListJS}/>
             <Content>
                 <h1 className="title"> 推荐歌单 </h1>
-                <Scroll onScroll={ forceCheck }>
+                <Index onScroll={ forceCheck }>
                     <List list={recommendListJS} />
-                </Scroll>
+                </Index>
                 { enterLoading ? <Loading/> : null}
             </Content>
         </Main>
