@@ -1,6 +1,6 @@
 import { CHANGE_BANNER, CHANGE_RECOMMEND_LIST, CHANGE_ENTER_LOADING } from './constants';
 import { fromJS } from 'immutable';
-import { fetchBanner, fetchRecommendList } from '../../fetch/index'
+import { fetchBanner, fetchRecommendList } from '../../fetch'
 
 export const changeBannerList = (data: any) => ({
     type: CHANGE_BANNER,
@@ -29,14 +29,6 @@ export const getBannerList = () => {
 };
 export const getRecommendList = () => {
     return async (dispatch: any) => {
-        // try {
-        //     const { data } = await fetchRecommendList<any>()
-        //     console.log('data', data)
-        //     dispatch(changeRecommendList(data.result))
-        //     dispatch(changeEnterLoading(false))
-        // } catch(error: any) {
-        //     console.log("推荐歌单数据传输错误", error)
-        // }
         fetchRecommendList().then((data: any) => {
             dispatch(changeRecommendList(data.result));
             dispatch(changeEnterLoading(false));//改变loading

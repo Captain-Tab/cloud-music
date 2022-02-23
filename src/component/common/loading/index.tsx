@@ -1,9 +1,19 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const Loading = () =>  {
+interface Iprops {
+    show?: boolean
+}
+
+const defaultProps = {
+    show: true
+}
+
+const Loading = (props: Iprops) =>  {
+    props = {...defaultProps, ...props }
+    const { show } = props;
     return (
-        <LoadingWrapper>
+        <LoadingWrapper style={show ? { display: "" }: { display: "none"}}>
             <div />
             <div />
         </LoadingWrapper>
