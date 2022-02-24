@@ -9,6 +9,20 @@ const getCount = (count: number) : undefined | number | string => {
     }
 }
 
+function debounce (func: (args: any) => any, delay: number)  {
+    let timer: null | any;
+    return (...args: any) => {
+        if(timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+            // @ts-ignore
+            func.apply(this, args);
+            clearTimeout(timer);
+        }, delay);
+    }
+}
 export {
-    getCount
+    getCount,
+    debounce
 }

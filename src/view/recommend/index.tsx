@@ -11,7 +11,6 @@ import Loading from "../../component/common/loading";
 const Recommend = (props: any) : JSX.Element => {
     const { bannerList, recommendList, enterLoading } = props
     const { getBannerListDt, getRecommendListDt } = props
-    // console.log(bannerList, recommendList)
 
     useEffect(() => {
         if(!bannerList.size){

@@ -9,7 +9,7 @@ import {
     getArtistsList,
     getHotArtistsList, refreshMoreArtistsList, refreshMoreHotArtistsList
 } from "../../store/artists/actionCreators";
-import { forceCheck } from "react-lazyload";
+import LazyLoad, { forceCheck } from "react-lazyload";
 import Loading from "../../component/common/loading";
 import { connect } from "react-redux";
 
@@ -54,7 +54,6 @@ const Artists = (props: any) : JSX.Element => {
        if(!hasMore) {
            return
        }
-       console.log('ttttt', checkSelect(category, alpha))
        checkSelect(category, alpha) ?
            pullUpRefreshDt(categoryMap.get(category), alpha, pageCount) :
            pullUpRefreshDt(categoryMap.get(category), alpha, pageCount, true)
@@ -78,7 +77,9 @@ const Artists = (props: any) : JSX.Element => {
                         return (
                             <ListItem key={item.accountId+""+index}>
                                 <div className="img_wrapper">
-                                    <img src={`${item.picUrl}?param=300x300`} width="100%" height="100%" alt="music"/>
+                                    <LazyLoad placeholder={<img width="100%" height="100%" src={require('../../assets/img/default-artist-cover.png')} alt="music"/>}>
+                                        <img src={`${item.picUrl}?param=300x300`} width="100%" height="100%" alt="music"/>
+                                    </LazyLoad>
                                 </div>
                                 <span className="name">{item.name}</span>
                             </ListItem>

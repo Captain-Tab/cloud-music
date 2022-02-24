@@ -27,7 +27,7 @@ const List = (props: Iprops): JSX.Element | null => {
                                 <div className="img_wrapper">
                                     <div className="decorate"/>
                                     {/* 加此参数可以减小请求的图片资源大小 */}
-                                    <LazyLoad placeholder={<img width="100%" height="100%" src={require('../../assets/img/default.png')} alt="music"/>}>
+                                    <LazyLoad placeholder={<img width="100%" height="100%" src={require('../../assets/img/default-recommend-cover.png')} alt="music"/>}>
                                         <img src={item.picUrl + "?param=300x300"} width="100%" height="100%" alt="music"/>
                                     </LazyLoad>
                                     <img src={item.picUrl + "?param=300x300"} width="100%" height="100%" alt="music"/>
