@@ -1,5 +1,11 @@
-import axios, { AxiosInstance } from 'axios'
-import { BASE_URL } from '../const/base'
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import { BASE_URL } from '../const/base';
+
+// 对axios实例函数改造，因为response拦截器已经返回data
+interface CustomAxios extends AxiosInstance {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (config: AxiosRequestConfig): Promise<any>;
+}
 
 // 新建axios实例
 const axiosInstance: AxiosInstance = axios.create ({
@@ -21,4 +27,6 @@ axiosInstance.interceptors.request.use((config) => {
 })
 
 
-export default axiosInstance
+export default axiosInstance as CustomAxios // 对axios实例函数改造，因为response拦截器已经返回data
+
+

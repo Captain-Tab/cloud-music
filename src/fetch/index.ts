@@ -1,9 +1,9 @@
 import axiosInstance from "../plugin/axiosInstance";
-import { AxiosPromise, AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from "axios";
 import {IArtistsParams} from "../types/artist";
 
 // 默认请求参数
-export const request = <T>(data: AxiosRequestConfig): AxiosPromise<T> => {
+export const request = <T>(data: AxiosRequestConfig): Promise<T> => {
     const defaultConfig: AxiosRequestConfig = {
         method: 'GET'
     }
@@ -28,18 +28,20 @@ export const fetchRecommendList = <T>() => {
 export const fetchHotArtists = <T>(count: number) => {
     return request<T>({
         url: '/top/artists',
-        params: { offset: count}
+        params: { offset: count, limit: 30}
     })
 }
 
 // 获取歌手列表
 export const fetchArtists = <T>(params: IArtistsParams) => {
     return request<T> ({
-        url: '/artists',
+        url: '/artist/list',
         params: {
-            cat: params.category,
+            type: params.type,
+            area: params.area,
             initial: params.alpha.toLowerCase(),
-            offset: params.count
+            offset: params.count,
+            limit: 30,
         }
     })
 }

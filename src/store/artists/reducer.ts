@@ -2,7 +2,8 @@ import { fromJS } from 'immutable';
 import * as actionTypes from './constants';
 
 const defaultState = fromJS({
-    singerList: [],
+    artistList: [],
+    hasMore: true, // 列表加载完毕
     enterLoading: true,     //控制进场Loading
     pullUpLoading: false,   //控制上拉加载动画
     pullDownLoading: false, //控制下拉加载动画
@@ -11,8 +12,8 @@ const defaultState = fromJS({
 
 export default (state : any = defaultState, action: any) => {
     switch(action.type) {
-        case actionTypes.CHANGE_SINGER_LIST:
-            return state.set('singerList', action.data);
+        case actionTypes.CHANGE_ARTIST_LIST:
+            return state.set('artistList', action.data);
         case actionTypes.CHANGE_PAGE_COUNT:
             return state.set('pageCount', action.data);
         case actionTypes.CHANGE_ENTER_LOADING:
@@ -21,6 +22,8 @@ export default (state : any = defaultState, action: any) => {
             return state.set('pullUpLoading', action.data);
         case actionTypes.CHANGE_PULLDOWN_LOADING:
             return state.set('pullDownLoading', action.data);
+        case actionTypes.CHANGE_MORE:
+            return state.set('hasMore', action.data);
         default:
             return state;
     }
