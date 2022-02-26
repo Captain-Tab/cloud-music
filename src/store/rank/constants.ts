@@ -1,0 +1,7 @@
+const CHANGE_RANK_LIST = 'rank/CHANGE_RANK_LIST';
+const CHANGE_LOADING = 'rank/CHANGE_LOADING';
+
+export {
+    CHANGE_LOADING,
+    CHANGE_RANK_LIST
+}

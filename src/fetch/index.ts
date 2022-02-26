@@ -45,3 +45,11 @@ export const fetchArtists = <T>(params: IArtistsParams) => {
         }
     })
 }
+
+// 获取歌手排行榜
+export const fetchRankList = <T>() => {
+    return request<T>({
+        url: '/toplist/detail'
+    })
+}
+

@@ -20,7 +20,7 @@ const Artists = (props: any) : JSX.Element => {
     const [alpha, setAlpha] = useState('')
 
     useEffect(() => {
-        getHotArtistsDt()
+        !artistList.size && getHotArtistsDt()
     }, [])
 
 
