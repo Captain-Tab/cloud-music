@@ -11,7 +11,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-config": "^5.0.6",
-    "@types/styled-components": "^5.1.22",
+    "@types/styled-components": "^5.1.23",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "axios": "^0.26.0",
