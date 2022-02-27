@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { getCount } from "../../utils/common";
 import LazyLoad from 'react-lazyload'
+import {useNavigate} from "react-router";
 
 export interface IListDetail {
     id: number;
@@ -16,6 +17,12 @@ interface Iprops {
 
 const List = (props: Iprops): JSX.Element | null => {
     const { list } = props
+    const navigate = useNavigate()
+
+    // 进入推荐歌单详情
+    const enterAlbum = (id: number) => {
+        navigate(`/recommend/${id}`)
+    }
 
     return (
         <ListWrapper>
@@ -23,7 +30,7 @@ const List = (props: Iprops): JSX.Element | null => {
                 {
                     list.map ((item, index) => {
                         return (
-                            <ListItem key={item.id + index}>
+                            <ListItem key={item.id + index} onClick={()=> enterAlbum(item.id)}>
                                 <div className="img_wrapper">
                                     <div className="decorate"/>
                                     {/* 加此参数可以减小请求的图片资源大小 */}
@@ -50,6 +57,7 @@ export default React.memo (List);
 const ListWrapper = styled.div`
   max-width: 100%;
 `;
+
 const ShowList = styled.div`
   box-sizing: border-box;
   width: 100%;

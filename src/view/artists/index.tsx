@@ -188,7 +188,8 @@ const NavContainer = styled.div`
     color: ${props => props.theme.fontColorDesc};
     font-size: ${props => props.theme.fontsizes};
   }
-`;
+`
+
  const ListItem = styled.div`
   box-sizing: border-box;
   display: flex;

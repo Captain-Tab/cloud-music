@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
-import { getRanklist} from "../../store/rank/actionCreators";
-import {filterIdx, filterIndex} from "../../utils/common";
+import { getRanklist } from "../../store/rank/actionCreators";
+import { filterIndex } from "../../utils/common";
 import styled from "styled-components";
 import Loading from "../../component/common/loading";
 import Scroll from "../../component/common/scroll";
+import {useNavigate} from "react-router";
 
 interface IListProps {
     globalRank: boolean
@@ -22,18 +23,15 @@ const Rank = (props: any) : JSX.Element => {
     const officialList = rankList.slice(0, globalStartIndex);
     const globalList = rankList.slice(globalStartIndex);
     const displayStyle = loading ? {"display":"none"}:  {"display": ""};
+    const naviate = useNavigate()
 
     // 获取初始化参数
     useEffect(()=> {
         !rankList.length && getRankListDataDt()
     }, [])
 
-    const enterDetail = (name: string) => {
-        const idx = filterIdx(name);
-        if(idx === null) {
-            alert("暂无相关数据");
-            return;
-        }
+    const enterDetail = (id: number) => {
+        naviate(`/rank/${id}`)
     }
     const renderSongList = (list: any[]) => {
         return list.length ? (
@@ -51,9 +49,9 @@ const Rank = (props: any) : JSX.Element => {
         return (
             <List globalRank={global}>
                 {
-                    list.map((item) => {
+                    list.map((item, index) => {
                         return (
-                            <ListItem key={item.coverImgId} tracks={item.tracks} onClick={() => enterDetail(item.name)}>
+                            <ListItem key={index} tracks={item.tracks} onClick={() => enterDetail(item.id)}>
                                 <div className="img_wrapper">
                                     <img src={item.coverImgUrl} alt=""/>
                                     <div className="decorate"/>
