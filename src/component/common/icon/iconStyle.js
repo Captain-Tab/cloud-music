@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 export const IconStyle = createGlobalStyle`
   @font-face {
     font-family: "iconfont"; /* Project id 3183231 */
-    src: url('//at.alicdn.com/t/font_3183231_1w4m5ywp2tz.woff2?t=1644852062863') format('woff2'),
-    url('//at.alicdn.com/t/font_3183231_1w4m5ywp2tz.woff?t=1644852062863') format('woff'),
-    url('//at.alicdn.com/t/font_3183231_1w4m5ywp2tz.ttf?t=1644852062863') format('truetype');
+    src: url('//at.alicdn.com/t/font_3183231_n81q1viyfdt.woff2?t=1645970236320') format('woff2'),
+    url('//at.alicdn.com/t/font_3183231_n81q1viyfdt.woff?t=1645970236320') format('woff'),
+    url('//at.alicdn.com/t/font_3183231_n81q1viyfdt.ttf?t=1645970236320') format('truetype');
   }
 
   .iconfont {
@@ -16,6 +16,10 @@ export const IconStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .icon-back:before {
+    content: "\\e60a";
+  }
+
   .icon-menu:before {
     content: "\\e610";
   }
@@ -23,5 +27,6 @@ export const IconStyle = createGlobalStyle`
   .icon-search:before {
     content: "\\e64f";
   }
+
 `
 

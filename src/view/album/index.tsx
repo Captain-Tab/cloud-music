@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { CSSTransition } from 'react-transition-group'
 import { useNavigate } from "react-router"
 import { noWrap } from '../../const/global-style'
-
+import Header from "../../component/common/header";
 
 const Album = (props: any) => {
     const [showStatus, setShowStatus] = useState(true)
@@ -11,8 +11,13 @@ const Album = (props: any) => {
     const navigate = useNavigate()
 
     const historyBack = () => {
+        console.log('x')
         navigate(-1)
     }
+
+    const handleBack = () => {
+        setShowStatus (false);
+    };
 
     return (
         <CSSTransition
@@ -21,10 +26,10 @@ const Album = (props: any) => {
             classNames="fly"
             appear={true}
             unmountOnExit
-            onExited={()=> historyBack }
+            onExited={historyBack }
         >
             <Container>
-                hi
+                <Header title={"返回"} handleClick={handleBack} isMarquee={false} />
             </Container>
         </CSSTransition>
 
@@ -60,8 +65,7 @@ const Container = styled.div`
 
 const TopDesc = styled.div`
   background-size: 100%;
-  padding: 5px 20px;
-  padding-bottom: 50px;
+  padding: 5px 20px 50px 20px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-around;
@@ -206,7 +210,9 @@ const SongList = styled.div`
       display: flex;
       align-items: center;
       position: absolute;
-      right: 0; top :0px; bottom: 0;
+      right: 0;
+      top :0; 
+      bottom: 0;
       width: 130px;
       line-height: 34px;
       background: ${props => props.theme.color};
