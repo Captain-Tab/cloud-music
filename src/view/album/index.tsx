@@ -1,23 +1,113 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { CSSTransition } from 'react-transition-group'
 import { useNavigate } from "react-router"
 import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
+import { TEST_DATA } from './const'
+import {getCount, getName} from "../../utils/common";
+import Icon from "../../component/common/icon";
+
+interface ITopDesc {
+    backgroundUrl: string;
+}
 
 const Album = (props: any) => {
+    const currentAlbum = TEST_DATA
     const [showStatus, setShowStatus] = useState(true)
+
 
     const navigate = useNavigate()
 
     const historyBack = () => {
-        console.log('x')
         navigate(-1)
     }
 
     const handleBack = () => {
         setShowStatus (false);
     };
+
+    const renderTopDesc = () => {
+        return (
+            <TopDesc backgroundUrl={currentAlbum.coverImgUrl}>
+                <div className="background">
+                    <div className="filter" />
+                </div>
+                <div className="img_wrapper">
+                    <div className="decorate"/>
+                    <img src={currentAlbum.coverImgUrl} alt="" />
+                    <div className="play_count">
+                        <i className="iconfont play">&#xe885;</i>
+                        <span className="count">{getCount(currentAlbum.subscribedCount)}</span>
+                    </div>
+                </div>
+                <div className="desc_wrapper">
+                    <div className="title">{currentAlbum.name}</div>
+                    <div className="person">
+                        <div className="avatar">
+                            <img src={currentAlbum.creator.avatarUrl} alt="" />
+                        </div>
+                        <div className="name">{currentAlbum.creator.nickname}</div>
+                    </div>
+                </div>
+            </TopDesc>
+        )
+    }
+
+    const renderMenu = () => {
+        return (
+            <Menu>
+                <div>
+                    <Icon type={'comment'} color={'#xe6ad'} />
+                    评论
+                </div>
+                <div>
+                    <Icon type={'like'} color={'#xe86f'}/>
+                    点赞
+                </div>
+                <div>
+                    <Icon type={'star'} color={'#xe62'}/>
+                    收藏
+                </div>
+                <div>
+                    <Icon type={'more'} color={'#xe606'}/>
+                    更多
+                </div>
+            </Menu>
+        )
+    }
+
+    const renderSongList = () => {
+        return (
+            <SongList>
+                <div className="first_line">
+                    <div className="play_all">
+                        <Icon type={'player'} color={'#xe6e3'} />
+                        <span>播放全部 <span className="sum">(共{currentAlbum.tracks.length}首)</span></span>
+                    </div>
+                    <div className="add_list">
+                        <Icon type={'plus'} color={'#xe62d'} />
+                        <span>收藏({getCount(currentAlbum.subscribedCount)})</span>
+                    </div>
+                </div>
+                <SongItem>
+                    {
+                        currentAlbum.tracks.map((item: any, index: number) => {
+                            return (
+                                <li key={index}>
+                                    <span className="index">{index + 1}</span>
+                                    <div className="info">
+                                        <span>{item.name}</span>
+                                        <span>{getName(item.ar)} - {item.al.name}</span>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                </SongItem>
+            </SongList>
+        )
+    }
 
     return (
         <CSSTransition
@@ -30,6 +120,12 @@ const Album = (props: any) => {
         >
             <Container>
                 <Header title={"返回"} handleClick={handleBack} isMarquee={false} />
+
+                <div>
+                    { renderTopDesc() }
+                    { renderMenu() }
+                    { renderSongList() }
+                </div>
             </Container>
         </CSSTransition>
 
@@ -63,7 +159,7 @@ const Container = styled.div`
   }
 `
 
-const TopDesc = styled.div`
+const TopDesc = styled.div<ITopDesc>`
   background-size: 100%;
   padding: 5px 20px 50px 20px;
   margin-bottom: 20px;
@@ -76,7 +172,7 @@ const TopDesc = styled.div`
   position: relative;
   .background{
     z-index: -1;
-    // background: url(${props => props.theme}) no-repeat;
+    background: url(${props => props.backgroundUrl}) no-repeat;
     background-position: 0 0;
     background-size: 100% 100%;
     position: absolute;

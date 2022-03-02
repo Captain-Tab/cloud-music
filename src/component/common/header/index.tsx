@@ -22,7 +22,7 @@ const Header = forwardRef((props: IProps, ref) => {
     return (
         // @ts-ignore
         <HeaderContainer ref={ref}>
-            <Icon type={'back'} onClick={handleClick}/>
+            <Icon type={'back'} onClick={handleClick} color={'#ffffff'}/>
             {/*<i className="iconfont back"  onClick={handleClick}>&#xe655;</i>*/}
             {
                 // eslint-disable-next-line
@@ -43,7 +43,7 @@ const HeaderContainer = styled.div`
   z-index: 100;
   display: flex;
   line-height: 40px;
-  // color: ${props =>  props.theme.fontColorLight};
+  color: ${props =>  props.theme.fontColorLight};
   .back{
     margin-right: 5px;
     font-size: 20px;
@@ -52,5 +52,6 @@ const HeaderContainer = styled.div`
   >h1{
     font-size: ${props => props.theme.fontColorLight};
     font-weight: 700;
+    margin-left: 20px;
   }
 `

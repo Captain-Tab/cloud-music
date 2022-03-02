@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { getCount } from "../../utils/common";
 import LazyLoad from 'react-lazyload'
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 
 export interface IListDetail {
     id: number;

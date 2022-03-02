@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 import { forceCheck } from 'react-lazyload';
 import { getBannerList, getRecommendList} from '../../store/recommend/actionCreators'
 import Loading from "../../component/common/loading";
+import {Outlet} from "react-router-dom";
 
 const Recommend = (props: any) : JSX.Element => {
     const { bannerList, recommendList, enterLoading } = props
@@ -34,6 +35,7 @@ const Recommend = (props: any) : JSX.Element => {
                 </Index>
                 { enterLoading ? <Loading/> : null}
             </Content>
+            <Outlet />
         </Main>
     )
 }

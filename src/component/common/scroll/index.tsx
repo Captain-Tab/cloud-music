@@ -171,7 +171,7 @@ const PullUpLoading = styled.div`
 export const PullDownLoading = styled.div`
   position: absolute;
   left:0; right:0;
-  top: 0px;
+  top: 0;
   height: 30px;
   margin: auto;
   z-index: 100;

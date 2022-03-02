@@ -6,20 +6,22 @@ import Rank from "../view/rank"
 import Album from "../view/album";
 import TopBar from "../component/layout/TopBar";
 
+
 const withLayout = (page: React.ReactElement) =>{
     return <TopBar>{page}</TopBar>
 }
 
+
 export default function Router () {
     return useRoutes([
         { path: '/', element: withLayout(<Recommend />)},
-        { path: '/recommend/:id', element: <Album />},
         { path: '/artists', element: withLayout(<Artists />) },
-        { path: '/rank', element: withLayout(<Rank />)},
-        { path: '/rank/:id', element: <Album /> },
+        { path: 'recommend', element: withLayout(<Recommend />),
+            children: [ { path: ':id', element: <Album /> } ]
+        },
+        { path: '/rank', element: withLayout(<Rank />),
+            children: [ { path: ':id', element: <Album /> } ]
+        },
         // ...
     ])
 }
-
-
-

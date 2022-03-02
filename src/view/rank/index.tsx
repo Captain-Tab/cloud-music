@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Loading from "../../component/common/loading";
 import Scroll from "../../component/common/scroll";
 import {useNavigate} from "react-router";
+import {Outlet} from "react-router-dom";
 
 interface IListProps {
     globalRank: boolean
@@ -77,7 +78,7 @@ const Rank = (props: any) : JSX.Element => {
                     { loading ? <EnterLoading><Loading /></EnterLoading> : null }
                 </div>
             </Scroll>
-            {/*{ renderRoutes(props.route.routes) }*/}
+            <Outlet />
         </Container>
     )
 }
