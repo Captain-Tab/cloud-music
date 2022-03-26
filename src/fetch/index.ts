@@ -53,3 +53,10 @@ export const fetchRankList = <T>() => {
     })
 }
 
+// 获取歌单详情
+export const fetchAlbumDetail = <T>(id: string) => {
+    return request<T>({
+        url: '/playlist/detail',
+        params: { id }
+    })
+}
