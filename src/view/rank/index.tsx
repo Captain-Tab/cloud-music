@@ -5,8 +5,8 @@ import { filterIndex } from "../../utils/common";
 import styled from "styled-components";
 import Loading from "../../component/common/loading";
 import Scroll from "../../component/common/scroll";
-import {useNavigate} from "react-router";
-import {Outlet} from "react-router-dom";
+import { useNavigate } from "react-router";
+import { Outlet } from "react-router-dom";
 
 interface IListProps {
     globalRank: boolean
@@ -34,6 +34,7 @@ const Rank = (props: any) : JSX.Element => {
     const enterDetail = (id: number) => {
         naviate(`/rank/${id}`)
     }
+
     const renderSongList = (list: any[]) => {
         return list.length ? (
             <SongList>

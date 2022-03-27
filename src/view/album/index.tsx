@@ -1,21 +1,34 @@
-import React, { useState } from "react"
+import React, {useCallback, useEffect, useRef, useState} from "react"
 import styled from "styled-components"
 import { CSSTransition } from 'react-transition-group'
-import { useNavigate } from "react-router"
+import {useNavigate, useParams, useRoutes} from "react-router"
 import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
-import { TEST_DATA } from './const'
-import {getCount, getName} from "../../utils/common";
+import {getCount, getName, isEmptyObject} from "../../utils/common";
 import Icon from "../../component/common/icon";
+import { connect } from 'react-redux';
+import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreators";
+import Scroll from "../../component/common/scroll";
+import Loading from "../../component/common/loading";
 
 interface ITopDesc {
     backgroundUrl: string;
 }
 
-const Album = (props: any) => {
-    const currentAlbum = TEST_DATA
-    const [showStatus, setShowStatus] = useState(true)
+const HEADER_HEIGHT = 45;
 
+const Album = (props: any) => {
+    const [showStatus, setShowStatus] = useState(true)
+    const [title, setTitle] = useState("歌单")
+    const { currentAlbum: currentAlbumImmutable, enterLoading, getAlbumDataDispatch } = props;
+    const { id } = useParams()
+    const currentAlbum = currentAlbumImmutable.toJS();
+    const headerRef = useRef();
+
+    useEffect(() => {
+        getAlbumDataDispatch(id);
+        setTitle(currentAlbum.name)
+    }, [getAlbumDataDispatch, id]);
 
     const navigate = useNavigate()
 
@@ -26,6 +39,13 @@ const Album = (props: any) => {
     const handleBack = () => {
         setShowStatus (false);
     };
+
+    const handleScroll = useCallback((pos) => {
+        const minScrollY = -HEADER_HEIGHT;
+        const headerCur = headerRef.current as any
+        //滑过顶部的高度开始变化
+        pos.y < minScrollY ? headerCur.setActive() : headerCur.setDefault()
+    }, [currentAlbum]);
 
     const renderTopDesc = () => {
         return (
@@ -119,20 +139,50 @@ const Album = (props: any) => {
             onExited={historyBack }
         >
             <Container>
-                <Header title={"返回"} handleClick={handleBack} isMarquee={false} />
+                <Header title={title}
+                        ref={headerRef}
+                        handleClick={handleBack}
+                        isMarquee={false} />
 
-                <div>
-                    { renderTopDesc() }
-                    { renderMenu() }
-                    { renderSongList() }
-                </div>
+                {!isEmptyObject(currentAlbum) ?
+                    (
+                        <Scroll
+                            bounceTop={false}
+                            onScroll={handleScroll}
+                        >
+                            <div>
+                                { renderTopDesc() }
+                                { renderMenu() }
+                                { renderSongList() }
+                            </div>
+                        </Scroll>
+                    )
+                    : null
+                }
+                { enterLoading ? <Loading/> : null}
             </Container>
         </CSSTransition>
 
     )
 }
 
-export default React.memo(Album);
+
+// 映射 Redux 全局的 state 到组件的 props 上
+const mapStateToProps = (state: any) => ({
+    currentAlbum: state.getIn (['album', 'currentAlbum']),
+    enterLoading: state.getIn (['album', 'enterLoading']),
+});
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getAlbumDataDispatch (id: string) {
+            dispatch (changeEnterLoading (true));
+            dispatch (getAlbumList (id));
+        },
+    }
+};
+
+export default connect (mapStateToProps, mapDispatchToProps)(React.memo (Album));
+
 
 const Container = styled.div`
   position: fixed;

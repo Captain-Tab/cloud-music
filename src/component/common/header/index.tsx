@@ -1,6 +1,10 @@
-import React, { forwardRef } from 'react';
+import React, {forwardRef, useState} from 'react';
 import styled from 'styled-components';
 import Icon from "../icon";
+
+interface IHeader {
+    active: boolean;
+}
 
 interface IProps {
     handleClick: (arg?: any) => any;
@@ -19,9 +23,26 @@ const defaultProps = {
 const Header = forwardRef((props: IProps, ref) => {
     props = { ...defaultProps, ...props }
     const { handleClick, title, isMarquee} = props;
+    const [scroll, setScrolled] = useState(false)
+
+    if (ref) {
+        (ref as any).current = {
+            setActive: () => {
+                changeScroll(true)
+            },
+            setDefault: () => {
+                changeScroll(false)
+            }
+        }
+    }
+
+    const changeScroll = (status: boolean) => {
+        setScrolled(status)
+    }
+
     return (
         // @ts-ignore
-        <HeaderContainer ref={ref}>
+        <HeaderContainer ref={ref} active={scroll}>
             <Icon type={'back'} onClick={handleClick} color={'#ffffff'}/>
             {/*<i className="iconfont back"  onClick={handleClick}>&#xe655;</i>*/}
             {
@@ -35,7 +56,7 @@ const Header = forwardRef((props: IProps, ref) => {
 
 export default React.memo(Header);
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<IHeader>`
   position: fixed;
   padding: 0 10px 5px 10px;
   height: 40px;
@@ -43,11 +64,16 @@ const HeaderContainer = styled.div`
   z-index: 100;
   display: flex;
   line-height: 40px;
+  opacity: ${props => (props.active ? 0.8 : 1 )};
   color: ${props =>  props.theme.fontColorLight};
+  background-color: ${props => (props.active ?  props.theme.color : 'unset' )};
   .back{
     margin-right: 5px;
     font-size: 20px;
     width: 20px;
+  }
+  .active {
+    background-color: black;
   }
   >h1{
     font-size: ${props => props.theme.fontColorLight};
