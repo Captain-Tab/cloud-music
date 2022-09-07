@@ -24,7 +24,7 @@ const Rank = (props: any) : JSX.Element => {
     const officialList = rankList.slice(0, globalStartIndex);
     const globalList = rankList.slice(globalStartIndex);
     const displayStyle = loading ? {"display":"none"}:  {"display": ""};
-    const naviate = useNavigate()
+    const navigate = useNavigate()
 
     // 获取初始化参数
     useEffect(()=> {
@@ -32,7 +32,7 @@ const Rank = (props: any) : JSX.Element => {
     }, [])
 
     const enterDetail = (id: number) => {
-        naviate(`/rank/${id}`)
+        navigate(`/rank/${id}`)
     }
 
     const renderSongList = (list: any[]) => {

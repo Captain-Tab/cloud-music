@@ -5,19 +5,27 @@ import styled from "styled-components";
 import Scroll from "../../component/common/scroll";
 import {
     changeEnterLoading,
-    changePageCount, changePullDownLoading, changePullUpLoading,
+    changePageCount,
+    changePullDownLoading,
+    changePullUpLoading,
     getArtistsList,
-    getHotArtistsList, refreshMoreArtistsList, refreshMoreHotArtistsList
+    getHotArtistsList,
+    refreshMoreArtistsList,
+    refreshMoreHotArtistsList
 } from "../../store/artists/actionCreators";
 import LazyLoad, { forceCheck } from "react-lazyload";
 import Loading from "../../component/common/loading";
 import { connect } from "react-redux";
+import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 
 const Artists = (props: any) : JSX.Element => {
     const { artistList, enterLoading, pullUpLoading, pullDownLoading, pageCount, hasMore } = props
     const { getHotArtistsDt, updateDt, pullUpRefreshDt, pullDownRefreshDt } = props
     const [category, setCategory] = useState('')
     const [alpha, setAlpha] = useState('')
+    const navigate = useNavigate()
 
     useEffect(() => {
         !artistList.size && getHotArtistsDt()
@@ -66,6 +74,11 @@ const Artists = (props: any) : JSX.Element => {
             pullDownRefreshDt(categoryMap.get(category), alpha, pageCount, true)
     };
 
+    // 进入歌手详情
+    const enterArtistDetail = (id: number) => {
+        navigate(`/artists/${id}`)
+    }
+
     // 渲染函数，返回歌手列表
     const renderSingerList = (): JSX.Element => {
         const list = artistList ? artistList.toJS(): []
@@ -75,7 +88,8 @@ const Artists = (props: any) : JSX.Element => {
                 {
                     list.map ((item: any, index: number) => {
                         return (
-                            <ListItem key={item.accountId+""+index}>
+                            <ListItem key={item.accountId + "" + index}
+                                      onClick={()=> enterArtistDetail(item.id)}>
                                 <div className="img_wrapper">
                                     <LazyLoad placeholder={<img width="100%" height="100%" src={require('../../assets/img/default-artist-cover.png')} alt="music"/>}>
                                         <img src={`${item.picUrl}?param=300x300`} width="100%" height="100%" alt="music"/>
@@ -116,6 +130,8 @@ const Artists = (props: any) : JSX.Element => {
                 </Scroll>
                 <Loading show={ enterLoading }/>
             </ListContainer>
+
+            <Outlet />
         </>
 
     )
@@ -144,7 +160,6 @@ const mapDispatchToProps = (dispatch: any) => {
         },
         // 滑到最底部刷新更新
         pullUpRefreshDt(category: { type: number, area: number} | any = {}, alpha: any, count: number, hot = false) {
-            console.log('hot', hot)
             dispatch(changePullUpLoading(true));
             dispatch(changePageCount(count + 30));
             hot ? dispatch(refreshMoreHotArtistsList()) : dispatch(refreshMoreArtistsList(category, alpha))

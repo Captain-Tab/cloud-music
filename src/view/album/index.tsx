@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useRef, useState} from "react"
 import styled from "styled-components"
 import { CSSTransition } from 'react-transition-group'
-import {useNavigate, useParams, useRoutes} from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
-import {getCount, getName, isEmptyObject} from "../../utils/common";
+import { getCount, getName, isEmptyObject } from "../../utils/common";
 import Icon from "../../component/common/icon";
 import { connect } from 'react-redux';
 import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreators";
