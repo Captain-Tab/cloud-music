@@ -24,6 +24,7 @@ module.exports = {
     "rules": {
         "no-unused-expressions": 0,
         "no-self-assign": 0,
+        "react/display-name": "off",
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/ban-ts-comment': 'off'

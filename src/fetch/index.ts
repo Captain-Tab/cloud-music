@@ -1,6 +1,6 @@
 import axiosInstance from "../plugin/axiosInstance";
 import { AxiosRequestConfig } from "axios";
-import {IArtistsParams} from "../types/artist";
+import { IArtistsParams } from "../types/artist";
 
 // 默认请求参数
 export const request = <T>(data: AxiosRequestConfig): Promise<T> => {

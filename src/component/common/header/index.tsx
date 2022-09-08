@@ -9,7 +9,7 @@ interface IHeader {
 interface IProps {
     handleClick: (arg?: any) => any;
     title: string;
-    isMarquee: boolean;
+    isMarquee?: boolean;
 }
 
 const defaultProps = {

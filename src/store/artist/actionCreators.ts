@@ -5,18 +5,19 @@ import { fetchArtistDetail } from '../../fetch';
 const changeArtist = (data: any) => ({
   type: CHANGE_ARTIST,
   data: fromJS(data)
-});
+})
 
 const changeSongs = (data: any) => ({
   type: CHANGE_SONGS_OF_ARTIST,
   data: fromJS(data)
 })
+
 export const changeEnterLoading = (data: any) => ({
   type: CHANGE_ENTER_LOADING,
   data
 })
 
-export const getSingerInfo = (id: string) => {
+export const getArtistInfo = (id: string) => {
   return (dispatch: any) => {
     fetchArtistDetail(id).then((data: any) => {
       dispatch(changeArtist(data.artist));
