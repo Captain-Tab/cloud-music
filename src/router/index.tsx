@@ -15,7 +15,7 @@ export default function Router () {
     return useRoutes([
         { path: '/', element: withLayout(<Recommend />) },
         {
-            path: '/artists', element: withLayout(<Artists />),
+          path: '/artists', element: withLayout(<Artists />),
             children: [{ path: ':id', element: <Artist /> }]
         },
         { path: '/recommend', element: withLayout(<Recommend />),

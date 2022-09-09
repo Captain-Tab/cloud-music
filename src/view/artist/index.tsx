@@ -8,6 +8,7 @@ import Loading from "../../component/common/loading";
 import SongsList from '../song-list'
 import Scroll from "../../component/common/scroll";
 import { useParams, useNavigate } from "react-router"
+import { HEADER_HEIGHT } from '../../const/staticVariable'
 
 interface IRef {
   ref: any
@@ -20,8 +21,6 @@ interface IContainer {
 interface IImgWrapper extends IRef {
   bgUrl: string
 }
-
-const HEADER_HEIGHT = 45
 
 const Artist = (props: any): JSX.Element => {
   const initialHeight = useRef(0);

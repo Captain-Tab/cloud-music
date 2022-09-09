@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Index from "../common/icon";
 import { NavLink } from "react-router-dom";
 import cx from "classnames";
+import Player from '../../view/player'
 
 interface Iprops {
     children: React.ReactElement
@@ -50,9 +51,11 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
                 </Tab>
             </TopWrapper>
 
-            <div className={'showArea'}>
-                { props. children}
-            </div>
+          <div className={'showArea'}>
+            {props.children}
+          </div>
+        
+          <Player />
         </Main>
     )
 }

@@ -10,12 +10,11 @@ import { connect } from 'react-redux';
 import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreators";
 import Scroll from "../../component/common/scroll";
 import Loading from "../../component/common/loading";
+import { HEADER_HEIGHT } from '../../const/staticVariable'
 
 interface ITopDesc {
     backgroundUrl: string;
 }
-
-const HEADER_HEIGHT = 45;
 
 const Album = (props: any) => {
     const [showStatus, setShowStatus] = useState(true)
