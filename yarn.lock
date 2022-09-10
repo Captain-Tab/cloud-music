@@ -1763,6 +1763,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/create-keyframe-animation@^0.1.0":
+  "integrity" "sha512-ZMlA+Fwcmnb7v7qT7OrqW8txby72vSLCP/JlLesa6H5b4J9RcvlCWPRaIvta4XGBKWYgGXp9I0RMk9nBwP06Rg=="
+  "resolved" "https://r.cnpmjs.org/@types/create-keyframe-animation/-/create-keyframe-animation-0.1.0.tgz"
+  "version" "0.1.0"
+
 "@types/eslint-scope@^3.7.0":
   "integrity" "sha512-PB3ldyrcnAicT35TWPs5IcwKD8S333HMaa2VVv4+wdvebJkjWuW/xESoB8IwRcog8HYVYamb1g/R31Qv5Bx03g=="
   "resolved" "https://registry.npmmirror.com/@types/eslint-scope/-/eslint-scope-3.7.3.tgz"

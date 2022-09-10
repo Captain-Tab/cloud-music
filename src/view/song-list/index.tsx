@@ -1,25 +1,51 @@
 import styled from 'styled-components';
 import React, { forwardRef } from 'react';
-import { getName } from '../../utils/common';
+import { getName } from '../../utils';
 import { noWrap } from '../../const/global-style'
+import { connect } from 'react-redux';
 
-interface Iprops {
-  collectCount: number, 
-  showCollect: boolean,
-  songs: any[]
-  showBackground: boolean;
-}
+import {
+  changePlayList,
+  changeCurrentIndex,
+  changeSequencePlayList
+} from '../../store/player/actionCreators';
+
+// type IFunc = (arg: any) => any
+
+// interface Iprops {
+//   collectCount: number, 
+//   showCollect: boolean,
+//   songs: any[]
+//   showBackground: boolean;
+//   hangePlayListDispatch: IFunc, 
+//   changePlayListDispatch: IFunc,
+//   changeCurrentIndexDispatch: IFunc,
+//   changeSequecePlayListDispatch: IFunc,
+//   musicAnimation: (argX: number, argY: number) => any
+// }
 
 interface ISongList {
   showBackground: boolean;
   ref: any;
 }
 
-const SongsList = forwardRef((props: Iprops, refs) => {
-  const { collectCount, showCollect, songs, showBackground } = props;
+const SongsList = forwardRef((props: any, refs) => {
+  const { collectCount,
+    showCollect,
+    songs,
+    showBackground,
+    changePlayListDispatch,
+    changeCurrentIndexDispatch,
+    changeSequecePlayListDispatch,
+    musicAnimation
+  } = props;
   const totalCount = songs.length;
+
   const selectItem = (e: any, index: number) => {
-    console.log(index);
+    changePlayListDispatch(songs);
+    changeSequecePlayListDispatch(songs);
+    changeCurrentIndexDispatch(index);
+    musicAnimation(e.nativeEvent.clientX, e.nativeEvent.clientY);
   }
 
   const songList = (list: any[]) => {
@@ -69,7 +95,23 @@ const SongsList = forwardRef((props: Iprops, refs) => {
   )
 });
 
-export default React.memo(SongsList);
+// 映射dispatch到props上
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    changePlayListDispatch(data: any) {
+      dispatch(changePlayList(data));
+    },
+    changeCurrentIndexDispatch(data: any) {
+      dispatch(changeCurrentIndex(data));
+    },
+    changeSequecePlayListDispatch(data: any) {
+      dispatch(changeSequencePlayList(data))
+    }
+  }
+};
+
+// 将ui组件包装成容器组件
+export default connect(null, mapDispatchToProps)(React.memo(SongsList));
 
 
 const SongList = styled.div<ISongList>`

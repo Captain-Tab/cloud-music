@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import { useNavigate, useParams } from "react-router"
 import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
-import { getCount, getName, isEmptyObject } from "../../utils/common";
+import { getCount, getName, isEmptyObject } from "../../utils";
 import Icon from "../../component/common/icon";
 import { connect } from 'react-redux';
 import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreators";
@@ -56,7 +56,8 @@ const Album = (props: any) => {
                     <div className="decorate"/>
                     <img src={currentAlbum.coverImgUrl} alt="" />
                     <div className="play_count">
-                        <i className="iconfont play">&#xe885;</i>
+                <i className="iconfont play">&#xe885;</i>
+                <Icon type={'music'} color={'#xe6e3'} />
                         <span className="count">{getCount(currentAlbum.subscribedCount)}</span>
                     </div>
                 </div>

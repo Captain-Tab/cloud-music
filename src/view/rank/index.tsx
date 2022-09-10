@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from 'react-redux';
 import { getRanklist } from "../../store/rank/actionCreators";
-import { filterIndex } from "../../utils/common";
+import { filterIndex } from "../../utils";
 import styled from "styled-components";
 import Loading from "../../component/common/loading";
 import Scroll from "../../component/common/scroll";

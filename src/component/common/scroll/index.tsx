@@ -10,7 +10,7 @@ import BScroll from "better-scroll"
 import styled from'styled-components';
 import LoadingExtra from "../loading-extra";
 import Loading from "../loading";
-import {debounce} from "../../../utils/common";
+import {debounce} from "../../../utils";
 
 
 interface Iprops {

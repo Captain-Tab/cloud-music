@@ -25,7 +25,7 @@ export const changePlayingState = (data: any) => ({
   data
 });
 
-export const changeSEQUENCEPlayList = (data: any) => ({
+export const changeSequencePlayList = (data: any) => ({
   type: SET_SEQUENCE_PLAYLIST,
   data: fromJS(data)
 });

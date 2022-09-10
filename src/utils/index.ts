@@ -45,7 +45,7 @@ function debounce (func: (args: any) => any, delay: number)  {
     }
 }
 
-//处理歌手列表拼接歌手名字
+// 处理歌手列表拼接歌手名字
 const getName = (list: any[]): string => {
     let str = "";
     list.map((item, index) => {

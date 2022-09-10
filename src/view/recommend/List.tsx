@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { getCount } from "../../utils/common";
+import { getCount } from "../../utils";
 import LazyLoad from 'react-lazyload'
 import { useNavigate } from "react-router";
 

@@ -9,6 +9,7 @@ import SongsList from '../song-list'
 import Scroll from "../../component/common/scroll";
 import { useParams, useNavigate } from "react-router"
 import { HEADER_HEIGHT } from '../../const/staticVariable'
+import MusicNote from "../../component/common/music-note";
 
 interface IRef {
   ref: any
@@ -47,6 +48,7 @@ const Artist = (props: any): JSX.Element => {
   const songScrollWrapper = useRef();
   const songScroll = useRef();
   const headerRef = useRef();
+  const musicNoteRef: any = useRef();
   let headerDOM:any
   const layer = useRef();
 
@@ -64,6 +66,10 @@ const Artist = (props: any): JSX.Element => {
     headerDOM = (headerRef.current as any)
     // eslint-disable-next-line
   }, []);
+
+  const musicAnimation = (x: number, y: number) => {
+    musicNoteRef.current.startAnimation({ x, y });
+  };
 
   const setShowStatusFalse = useCallback(() => {
     setShowStatus(false);
@@ -134,12 +140,12 @@ const Artist = (props: any): JSX.Element => {
             <SongsList
               songs={songs}
               showCollect={false}
-              collectCount={0}
-              showBackground={false}
+              musicAnimation={musicAnimation}
             />
           </Scroll>
         </SongListWrapper>
         {loading ? (<Loading></Loading>) : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </Container>
     </CSSTransition>
   )

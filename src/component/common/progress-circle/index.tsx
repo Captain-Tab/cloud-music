@@ -2,7 +2,7 @@ import React, { ReactChild } from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-  radius: string,
+  radius: number,
   percent: number,
   children: ReactChild
 }
