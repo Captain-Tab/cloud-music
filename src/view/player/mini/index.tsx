@@ -22,14 +22,9 @@ interface IProps {
 }
 
 const MiniPlayer = (props: IProps) => {
-  console.log('song', props)
   const { song, fullScreen, playing, percent, toggleFullScreen, clickPlaying } = props;
 
   const miniPlayerRef: any = useRef()
-
-  useEffect(() => {
-    console.log('nice')
-  })
 
   return (
     <CSSTransition

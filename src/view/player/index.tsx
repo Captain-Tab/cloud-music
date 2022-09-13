@@ -11,9 +11,15 @@ import {
 } from "../../store/player/actionCreators";
 import MiniPlayer from './mini';
 import NormalPlayer from './normal';
-import { getSongUrl, isEmptyObject, shuffle, findIndex } from "../../utils";
+import {
+  getSongUrl,
+  isEmptyObject,
+  shuffle,
+  findIndex
+} from "../../utils";
 import { playMode } from '../../const/staticVariable';
 import Toast from "../../component/common/toast";
+
 
 // interface ISong {
 //   al: any,
@@ -71,11 +77,9 @@ const Player = (props: any) => {
     changeModeDispatch,//改变mode
     toggleFullScreenDispatch
   } = props;
-
   const playList = immutablePlayList.toJS();
   const sequencePlayList = immutableSequencePlayList.toJS();
   const currentSong = immutableCurrentSong.toJS();
-
 
   useEffect(() => {
     if (
@@ -84,8 +88,7 @@ const Player = (props: any) => {
       !playList[currentIndex] ||
       playList[currentIndex].id === preSong.id ||
       !songReady
-    )
-      return;
+    )return;
     const current = playList[currentIndex];
     setPreSong(current);
     setSongReady(false);
@@ -105,10 +108,6 @@ const Player = (props: any) => {
     playing ? audioRef.current.play() : audioRef.current.pause();
   }, [playing]);
 
-  useEffect(() => {
-    console.log('gogo', currentSong)
-  })
-
   const clickPlaying = (e: React.MouseEvent<HTMLElement, MouseEvent>, state: any) => {
     e.stopPropagation();
     togglePlayingDispatch(state);
@@ -126,6 +125,7 @@ const Player = (props: any) => {
       togglePlayingDispatch(true);
     }
   };
+  
   //一首歌循环
   const handleLoop = () => {
     audioRef.current.currentTime = 0;
@@ -188,6 +188,7 @@ const Player = (props: any) => {
       handleNext();
     }
   };
+
   return (
     <div>
       {isEmptyObject(currentSong) ? null : (

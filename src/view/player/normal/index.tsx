@@ -6,6 +6,8 @@ import animations from "create-keyframe-animation"
 import { CSSTransition } from "react-transition-group"
 import ProgressBar from '../../../component/common/progress-bar'
 import { playMode } from '../../../const/staticVariable';
+import Icon from '../../../component/common/icon'
+
 
 interface ISong {
   al: any,
@@ -115,16 +117,16 @@ const NormalPlayer = (props: IProps) => {
     normalPlayerRef.current.style.display = "none";
   };
 
-  const getPlayMode = () => {
-    let content;
+  const getPlayMode = (): string => {
+    let iconName;
     if (mode === playMode.sequence) {
-      content = "&#xe625;";
+      iconName = 'loop';
     } else if (mode === playMode.loop) {
-      content = "&#xe653;";
+      iconName = 'infinite';
     } else {
-      content = "&#xe61b;";
+      iconName = 'shuffle';
     }
-    return content;
+    return iconName;
   };
 
   return (
@@ -149,7 +151,7 @@ const NormalPlayer = (props: IProps) => {
         <div className="background layer"></div>
         <Top className="top">
           <div className="back" onClick={() => toggleFullScreen(false)}>
-            <i className="iconfont icon-back">&#xe662;</i>
+            <Icon type={'unfold'} color={'#xe662'} />
           </div>
           <h1 className="title">{song.name}</h1>
           <h1 className="subtitle">{getName(song.ar)}</h1>
@@ -177,29 +179,33 @@ const NormalPlayer = (props: IProps) => {
             <div className="time time-r">{formatPlayTime(duration)}</div>
           </ProgressWrapper>
           <Operators>
-            <div className="icon i-left" onClick={changeMode}>
+            <div className="icon i-left" onClick={changeMode}>  
+              <Icon type={getPlayMode()} color={'#xe6e1'} />
+{/*   
               <i
                 className="iconfont"
                 dangerouslySetInnerHTML={{ __html: getPlayMode() }}
-              ></i>
+              ></i> */}
             </div>
             <div className="icon i-left" onClick={handlePrev}>
-              <i className="iconfont">&#xe6e1;</i>
+              <Icon type={'previous'} color={'#xe6e1'} />
             </div>
             <div className="icon i-center">
-              <i
-                className="iconfont"
-                onClick={e => clickPlaying(e, !playing)}
-                dangerouslySetInnerHTML={{
-                  __html: playing ? "&#xe723;" : "&#xe731;"
-                }}
-              ></i>
+              {
+                playing ?
+                  <Icon type={'pauseCircle'}
+                        color={'#xe723'}
+                        onClick={e => clickPlaying(e, !playing)} /> :
+                  <Icon type={'playCircle'}
+                        color={'#xe731'}
+                        onClick={e => clickPlaying(e, !playing)} />
+              }
             </div>
             <div className="icon i-right" onClick={handleNext}>
-              <i className="iconfont">&#xe718;</i>
+              <Icon type={'next'} color={'#xe718'} />
             </div>
             <div className="icon i-right">
-              <i className="iconfont">&#xe640;</i>
+              <Icon type={'musicList'} color={'#xe640'} />
             </div>
           </Operators>
         </Bottom>
@@ -280,7 +286,6 @@ const Top = styled.div`
       font-size: 24px;
       color: ${props => props.theme.fontColorDesc};
       font-weight: bold;
-      transform: rotate(90deg);
     }
   }
   .title {

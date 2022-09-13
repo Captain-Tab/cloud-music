@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 export const IconStyle = createGlobalStyle`
 @font-face {
   font-family: "iconfont"; /* Project id 3183231 */
-  src: url('//at.alicdn.com/t/c/font_3183231_tdjgx6of6q8.woff2?t=1662826598091') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3183231_tdjgx6of6q8.woff?t=1662826598091') format('woff'),
-       url('//at.alicdn.com/t/c/font_3183231_tdjgx6of6q8.ttf?t=1662826598091') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.woff2?t=1663052983723') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.woff?t=1663052983723') format('woff'),
+       url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.ttf?t=1663052983723') format('truetype');
 }
 
 .iconfont {
@@ -14,6 +14,14 @@ export const IconStyle = createGlobalStyle`
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-musicNote:before {
+  content: "\\ea29";
+}
+
+.icon-unfold:before {
+  content: "\\e62d";
 }
 
 .icon-list:before {
@@ -44,7 +52,7 @@ export const IconStyle = createGlobalStyle`
   content: "\\e60b";
 }
 
-.icon-previos:before {
+.icon-previous:before {
   content: "\\e818";
 }
 

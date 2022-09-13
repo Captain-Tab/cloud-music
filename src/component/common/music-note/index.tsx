@@ -1,4 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, forwardRef, ReactChild } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { prefixStyle } from '../../../utils';
 
@@ -16,7 +17,7 @@ const MusicNote = forwardRef((props: any, ref) => {
 
   useEffect(() => {
     for (let i = 0; i < ICON_NUMBER; i++) {
-      const node = createNode(`<div class="iconfont">&#xe642;</div>`);
+      const node = createNode(`<i class="iconfont icon-musicNote">&#xe642;</div>`);
       iconsRef.current.appendChild(node);
     }
     const domArray: any[] = [].slice.call(iconsRef.current.children)
@@ -28,13 +29,13 @@ const MusicNote = forwardRef((props: any, ref) => {
         item.running = false;
 
         const icon = item.querySelector('div');
-        icon.style[transform as string]  = `translate3d(0, 0, 0)`;
+        icon.style[transform as string] = `translate3d(0, 0, 0)`;
       }, false);
     });
     // eslint-disable-next-line
   }, []);
 
-  const startAnimation = ({ x, y }: { x: number, y: number}) => {
+  const startAnimation = ({ x, y }: { x: number, y: number }) => {
     for (let i = 0; i < ICON_NUMBER; i++) {
       const domArray: any[] = [].slice.call(iconsRef.current.children)
       const item = domArray[i]

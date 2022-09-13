@@ -11,18 +11,22 @@ import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreato
 import Scroll from "../../component/common/scroll";
 import Loading from "../../component/common/loading";
 import { HEADER_HEIGHT } from '../../const/staticVariable'
+import MusicNote from "../../component/common/music-note";
+
 
 interface ITopDesc {
     backgroundUrl: string;
 }
 
 const Album = (props: any) => {
+  
     const [showStatus, setShowStatus] = useState(true)
     const [title, setTitle] = useState("歌单")
     const { currentAlbum: currentAlbumImmutable, enterLoading, getAlbumDataDispatch } = props;
-    const { id } = useParams()
+    const { id } = useParams();
     const currentAlbum = currentAlbumImmutable.toJS();
     const headerRef = useRef();
+    const musicNoteRef: any = useRef();
 
     useEffect(() => {
         getAlbumDataDispatch(id);
@@ -38,7 +42,11 @@ const Album = (props: any) => {
     const handleBack = () => {
         setShowStatus (false);
     };
-
+  
+    const musicAnimation = (x: number, y: number) => {
+      musicNoteRef.current.startAnimation({ x, y });
+    };
+  
     const handleScroll = useCallback((pos) => {
         const minScrollY = -HEADER_HEIGHT;
         const headerCur = headerRef.current as any
@@ -98,7 +106,7 @@ const Album = (props: any) => {
     }
 
     const renderSongList = () => {
-        return (
+      return (
             <SongList>
                 <div className="first_line">
                     <div className="play_all">
@@ -153,7 +161,8 @@ const Album = (props: any) => {
                             <div>
                                 { renderTopDesc() }
                                 { renderMenu() }
-                                { renderSongList() }
+                                { renderSongList()}
+                                <MusicNote ref={musicNoteRef}></MusicNote>
                             </div>
                         </Scroll>
                     )
