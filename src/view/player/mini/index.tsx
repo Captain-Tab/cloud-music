@@ -18,13 +18,26 @@ interface IProps {
   playing: boolean,
   percent: number,
   toggleFullScreen: (fullScreen: boolean) => any,
-  clickPlaying: (e: React.MouseEvent<HTMLElement, MouseEvent>, playing: boolean) => any
+  clickPlaying: (e: React.MouseEvent<HTMLElement, MouseEvent>, playing: boolean) => any,
+  togglePlayList: (toogle: boolean) => any
 }
 
 const MiniPlayer = (props: IProps) => {
-  const { song, fullScreen, playing, percent, toggleFullScreen, clickPlaying } = props;
+  const { song,
+    fullScreen,
+    playing,
+    percent,
+    toggleFullScreen,
+    clickPlaying,
+    togglePlayList
+  } = props;
 
   const miniPlayerRef: any = useRef()
+ 
+  const handleTogglePlayList = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    togglePlayList(true);
+    e.stopPropagation();
+  }
 
   return (
     <CSSTransition
@@ -65,7 +78,7 @@ const MiniPlayer = (props: IProps) => {
             }
           </ProgressCircle>
         </div>
-        <div className="control">
+        <div className="control" onClick={handleTogglePlayList}>
           <Icon type={'musicList'} className={"iconfont"} color={'#xe640'} />
         </div>
       </MiniPlayerContainer>

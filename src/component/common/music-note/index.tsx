@@ -1,5 +1,4 @@
 import React, { useEffect, useImperativeHandle, useRef, forwardRef, ReactChild } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { prefixStyle } from '../../../utils';
 

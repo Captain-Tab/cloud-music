@@ -47,20 +47,21 @@ const Index = forwardRef((props: Iprops | any, ref) => {
     const { pullUp, pullDown, onScroll, pullUpLoading, pullDownLoading } = props;
     const [bScroll, setBScroll] = useState<any> (null);
     const scrollRef: RefObject<any> = useRef()
+
     const PullupDisplayStyle = pullUpLoading ? { display: "" } : { display: "none" };
     const PullDownDisplayStyle = pullDownLoading ? { display: "" } : { display: "none" };
 
     const pullUpDebounce = useMemo(() => {
-        return debounce(pullUp, 500)
+        return debounce(pullUp, 300)
     }, [pullUp]);
 
     const pullDownDebounce = useMemo(() => {
-        return debounce(pullDown, 500)
+        return debounce(pullDown, 300)
     }, [pullDown]);
 
 
     // 初始化
-    useEffect (() => {
+    useEffect(() => {
         const scroll = new BScroll (scrollRef.current, {
             scrollX: direction === "horizontal",
             scrollY: direction === "vertical",
@@ -74,7 +75,7 @@ const Index = forwardRef((props: Iprops | any, ref) => {
         });
         setBScroll(scroll);
         return () => {
-            setBScroll ({});
+            setBScroll({});
         }
         //eslint-disable-next-line
     }, []);
@@ -82,11 +83,11 @@ const Index = forwardRef((props: Iprops | any, ref) => {
     // 监听依赖
     useEffect (() => {
         if (!bScroll || !onScroll) return;
-        bScroll.on ('scroll', (scroll: any) => {
+        bScroll.on('scroll', (scroll: any) => {
             onScroll (scroll);
         })
         return () => {
-            bScroll.off ('scroll');
+            bScroll.off('scroll');
         }
     }, [onScroll, bScroll]);
 
@@ -99,7 +100,7 @@ const Index = forwardRef((props: Iprops | any, ref) => {
             }
         });
         return () => {
-            bScroll.off ('scrollEnd');
+            bScroll.off('scrollEnd');
         }
     }, [pullUpDebounce, pullUp, bScroll]);
 
@@ -112,23 +113,22 @@ const Index = forwardRef((props: Iprops | any, ref) => {
             }
         });
         return () => {
-            bScroll.off ('touchEnd');
+            bScroll.off('touchEnd');
         }
     }, [pullDownDebounce, pullDown, bScroll]);
 
 
     useEffect (() => {
         if (refresh && bScroll){
-            bScroll.refresh ();
-            bScroll.scrollTo(0, 0)
+            bScroll.refresh();
         }
     });
 
     useImperativeHandle (ref, () => ({
         refresh () {
             if (bScroll) {
-                bScroll.refresh ()
-                bScroll.scrollTo (0, 0)
+                bScroll.refresh()
+                bScroll.scrollTo(0, 0)
             }
         },
         getBScroll () {

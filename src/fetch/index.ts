@@ -63,8 +63,16 @@ export const fetchAlbumDetail = <T>(id: string) => {
 
 // 获取歌手详情
 export const fetchArtistDetail = <T>(id: string) => {
-      return request<T>({
+    return request<T>({
         url: 'artists',
+        params: { id }
+    })
+}
+
+// 获取歌词信息
+export const fetchLyricRequest = <T>(id: string) => {
+    return request<T>({
+        url: 'lyric',
         params: { id }
     })
 }

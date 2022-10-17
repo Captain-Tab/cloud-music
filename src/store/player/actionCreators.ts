@@ -6,7 +6,8 @@ import {
   SET_PLAYLIST,
   SET_PLAY_MODE,
   SET_CURRENT_INDEX,
-  SET_SHOW_PLAYLIST
+  SET_SHOW_PLAYLIST,
+  DELETE_SONG
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -47,5 +48,25 @@ export const changeCurrentIndex = (data: any) => ({
 
 export const changeShowPlayList = (data: any) => ({
   type: SET_SHOW_PLAYLIST,
+  data
+});
+
+// export const insertSong = (data: any) => ({
+//   type: INSERT_SONG,
+//   data
+// });
+
+// export const getSongDetail = (id: string) => {
+//   return (dispatch: any) => {
+//     getSongDetailRequest(id).then((data: any) => {
+//       const song = data.songs[0];
+//       console.log(song);
+//       dispatch(insertSong(song));
+//     })
+//   }
+// }
+
+export const deleteSong = (data: any) => ({
+  type: DELETE_SONG,
   data
 });

@@ -156,8 +156,7 @@ const Album = (props: any) => {
                     (
                         <Scroll
                             bounceTop={false}
-                            onScroll={handleScroll}
-                        >
+                            onScroll={handleScroll}>
                             <div>
                                 { renderTopDesc() }
                                 { renderMenu() }

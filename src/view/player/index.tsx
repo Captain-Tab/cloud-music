@@ -11,6 +11,7 @@ import {
 } from "../../store/player/actionCreators";
 import MiniPlayer from './mini';
 import NormalPlayer from './normal';
+import PlayList from "./play-list";
 import {
   getSongUrl,
   isEmptyObject,
@@ -19,7 +20,8 @@ import {
 } from "../../utils";
 import { playMode } from '../../const/staticVariable';
 import Toast from "../../component/common/toast";
-
+import { fetchLyricRequest } from "../../fetch/index"
+import Lyric from '../../utils/lyric-parser'
 
 // interface ISong {
 //   al: any,
@@ -54,13 +56,16 @@ const Player = (props: any) => {
   const [duration, setDuration] = useState(0);
   //歌曲播放进度
   const percent = isNaN(currentTime / duration) ? 0 : currentTime / duration;
-
+ 
   const [preSong, setPreSong] = useState<any>({});
   const [modeText, setModeText] = useState("");
-  const [songReady, setSongReady] = useState(true);
+  const [currentPlayingLyric, setPlayingLyric] = useState<any>("");
 
   const audioRef: any = useRef();
   const toastRef: any = useRef();
+  const currentLyric: any = useRef();
+  const currentLineNum = useRef(0);
+  const songReady: any = useRef(true);
 
   const {
     playing,
@@ -71,10 +76,11 @@ const Player = (props: any) => {
     sequencePlayList: immutableSequencePlayList,//顺序列表
     fullScreen,
     togglePlayingDispatch,
+    togglePlayListDispatch,
     changeCurrentIndexDispatch,
     changeCurrentDispatch,
-    changePlayListDispatch,//改变playList
-    changeModeDispatch,//改变mode
+    changePlayListDispatch, //改变playList
+    changeModeDispatch, //改变mode
     toggleFullScreenDispatch
   } = props;
   const playList = immutablePlayList.toJS();
@@ -87,19 +93,20 @@ const Player = (props: any) => {
       currentIndex === -1 ||
       !playList[currentIndex] ||
       playList[currentIndex].id === preSong.id ||
-      !songReady
+      !songReady.current
     )return;
     const current = playList[currentIndex];
     setPreSong(current);
-    setSongReady(false);
-    changeCurrentDispatch(current);//赋值currentSong
+    songReady.current = false;
+    changeCurrentDispatch(current); //赋值currentSong
     audioRef.current.src = getSongUrl(current.id);
     setTimeout(() => {
       audioRef.current.play().then(() => {
-        setSongReady(true);
-      });
+        songReady.current = true
+      })
     });
     togglePlayingDispatch(true);//播放状态
+    updateLyric(current.id);
     setCurrentTime(0);//从头开始播放
     setDuration((current.dt / 1000) | 0);//时长
   }, [playList, currentIndex]);
@@ -111,7 +118,39 @@ const Player = (props: any) => {
   const clickPlaying = (e: React.MouseEvent<HTMLElement, MouseEvent>, state: any) => {
     e.stopPropagation();
     togglePlayingDispatch(state);
+    if (currentLyric.current) {
+      currentLyric.current.togglePlay(currentTime * 1000);
+    }
+  }
+
+  const handleLyric = ({ lineNum, txt}: {lineNum: number, txt: string}) => {
+    if (!currentLyric.current) return;
+    currentLineNum.current = lineNum;
+    setPlayingLyric(txt);
   };
+
+  const updateLyric = async (id: string) => {
+    let lyric = "";
+    if (currentLyric.current) {
+      currentLyric.current.stop();
+    }
+    try {
+      const data: any = await fetchLyricRequest(id)
+      lyric = data.lrc.lyric;
+      if (!lyric) {
+        currentLyric.current = null;
+        return;
+      }
+      currentLyric.current = new Lyric(lyric, handleLyric as any);
+      currentLyric.current.play();
+      currentLineNum.current = 0;
+      currentLyric.current.seek(0);
+    } catch (error) {
+      console.log('error', error)
+      songReady.current = true
+      audioRef.current.play();
+    }
+  }
 
   const updateTime = (e: any ) => {
     setCurrentTime(e.target.currentTime);
@@ -124,9 +163,17 @@ const Player = (props: any) => {
     if (!playing) {
       togglePlayingDispatch(true);
     }
+    if (currentLyric.current) {
+      currentLyric.current.seek(newTime * 1000);
+    }
   };
-  
-  //一首歌循环
+
+  // 异常处理
+  const handleError = () => {
+    console.warn('播放出错')
+  }
+
+  // 一首歌循环
   const handleLoop = () => {
     audioRef.current.currentTime = 0;
     changePlayingState(true);
@@ -199,6 +246,7 @@ const Player = (props: any) => {
           toggleFullScreen={toggleFullScreenDispatch}
           clickPlaying={clickPlaying}
           percent={percent}
+          togglePlayList={togglePlayListDispatch}
         />
       )
       }
@@ -208,6 +256,9 @@ const Player = (props: any) => {
           fullScreen={fullScreen}
           playing={playing}
           mode={mode}
+          currentLyric={currentLyric.current}
+          currentPlayingLyric={currentPlayingLyric}
+          currentLineNum={currentLineNum.current}
           changeMode={changeMode}
           duration={duration}
           currentTime={currentTime}
@@ -217,6 +268,7 @@ const Player = (props: any) => {
           onProgressChange={onProgressChange}
           handlePrev={handlePrev}
           handleNext={handleNext}
+          togglePlayList={togglePlayListDispatch}
         />
       )
       }
@@ -224,8 +276,9 @@ const Player = (props: any) => {
         ref={audioRef}
         onTimeUpdate={updateTime}
         onEnded={handleEnd}
-      ></audio>
-      <Toast text={modeText} ref={toastRef}></Toast>
+        onError={handleError} />
+      <PlayList />
+      <Toast text={modeText} ref={toastRef} />
     </div>
   )
 }

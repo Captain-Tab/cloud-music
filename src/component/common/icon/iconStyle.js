@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components';
 export const IconStyle = createGlobalStyle`
 @font-face {
   font-family: "iconfont"; /* Project id 3183231 */
-  src: url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.woff2?t=1663052983723') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.woff?t=1663052983723') format('woff'),
-       url('//at.alicdn.com/t/c/font_3183231_88w8deg5e25.ttf?t=1663052983723') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3183231_ax04vsk9rwn.woff2?t=1666005223638') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3183231_ax04vsk9rwn.woff?t=1666005223638') format('woff'),
+       url('//at.alicdn.com/t/c/font_3183231_ax04vsk9rwn.ttf?t=1666005223638') format('truetype');
 }
 
 .iconfont {
@@ -14,6 +14,10 @@ export const IconStyle = createGlobalStyle`
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-clear:before {
+  content: "\\e645";
 }
 
 .icon-musicNote:before {
@@ -107,4 +111,5 @@ export const IconStyle = createGlobalStyle`
 .icon-search:before {
   content: "\\e64f";
 }
+
 `
