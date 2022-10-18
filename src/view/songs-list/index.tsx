@@ -9,6 +9,7 @@ import {
   changeCurrentIndex,
   changeSequencePlayList
 } from '../../store/player/actionCreators';
+import Icon from '../../component/common/icon';
 
 // type IFunc = (arg: any) => any
 
@@ -70,7 +71,7 @@ const SongsList = forwardRef((props: any, refs) => {
   const collect = (count: number) => {
     return (
       <div className="add_list">
-        <i className="iconfont">&#xe62d;</i>
+        <Icon type={'plus'} color={'#xe62d'} />
         <span>收藏({Math.floor(count / 1000) / 10}万)</span>
       </div>
       // <div className="isCollected">
@@ -83,7 +84,7 @@ const SongsList = forwardRef((props: any, refs) => {
     <SongList ref={refs} showBackground={showBackground}>
       <div className="first_line">
         <div className="play_all" onClick={(e) => selectItem(e, 0)}>
-          <i className="iconfont">&#xe6e3;</i>
+          <Icon type={'play'} color={'#xe6e3'} />
           <span>播放全部 <span className="sum">(共{totalCount}首)</span></span>
         </div>
         {showCollect ? collect(collectCount) : null}
@@ -117,7 +118,7 @@ export default connect(null, mapDispatchToProps)(React.memo(SongsList));
 const SongList = styled.div<ISongList>`
   border-radius: 10px;
   opacity: 0.98;
-  ${props => props.showBackground ? `background: ${props.theme.highlightBkColor}` : ""}
+  background: ${props => props.theme.highlightBkColor};
   .first_line{
     box-sizing: border-box;
     padding: 10px 0;
@@ -159,18 +160,13 @@ const SongList = styled.div<ISongList>`
         font-size: 10px;
         margin: 0 5px 0 10px;
       }
-      span{
+       span{
         font-size: 14px;
         line-height: 34px;
       }
     }
-    .isCollected{
-      display: flex;
-      background: ${props => props.theme.backgroundColor};
-      color: ${props => props.theme.fontColorDesc};
-    }
-}
 `
+
 
 const SongItem = styled.ul`
   >li{

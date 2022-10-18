@@ -5,7 +5,7 @@ import Header from "../../component/common/header";
 import { connect } from "react-redux"
 import { changeEnterLoading, getArtistInfo } from "../../store/artist/actionCreators";
 import Loading from "../../component/common/loading";
-import SongsList from '../song-list'
+import SongsList from '../songs-list'
 import Scroll from "../../component/common/scroll";
 import { useParams, useNavigate } from "react-router"
 import { HEADER_HEIGHT } from '../../const/staticVariable'

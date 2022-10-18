@@ -71,7 +71,6 @@ const NormalPlayer = (props: IProps) => {
       // 保持当前歌词在第5条的位置
       const lineEl = (lyricLineRefs.current[currentLineNum - 5] as any).current;
       bScroll.scrollToElement(lineEl, 1000)
-      console.log('end')
     } else {
       // 当前歌词行数<=5, 直接滚动到最顶端
       bScroll.scrollTo(0, 0, 1000);

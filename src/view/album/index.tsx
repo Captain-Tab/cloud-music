@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import { useNavigate, useParams } from "react-router"
 import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
-import { getCount, getName, isEmptyObject } from "../../utils";
+import { getCount, isEmptyObject } from "../../utils";
 import Icon from "../../component/common/icon";
 import { connect } from 'react-redux';
 import { getAlbumList, changeEnterLoading } from "../../store/album/actionCreators";
@@ -12,7 +12,7 @@ import Scroll from "../../component/common/scroll";
 import Loading from "../../component/common/loading";
 import { HEADER_HEIGHT } from '../../const/staticVariable'
 import MusicNote from "../../component/common/music-note";
-
+import SongsList from "../songs-list"
 
 interface ITopDesc {
     backgroundUrl: string;
@@ -107,34 +107,14 @@ const Album = (props: any) => {
 
     const renderSongList = () => {
       return (
-            <SongList>
-                <div className="first_line">
-                    <div className="play_all">
-                        <Icon type={'player'} color={'#xe6e3'} />
-                        <span>播放全部 <span className="sum">(共{currentAlbum.tracks.length}首)</span></span>
-                    </div>
-                    <div className="add_list">
-                        <Icon type={'plus'} color={'#xe62d'} />
-                        <span>收藏({getCount(currentAlbum.subscribedCount)})</span>
-                    </div>
-                </div>
-                <SongItem>
-                    {
-                        currentAlbum.tracks.map((item: any, index: number) => {
-                            return (
-                                <li key={index}>
-                                    <span className="index">{index + 1}</span>
-                                    <div className="info">
-                                        <span>{item.name}</span>
-                                        <span>{getName(item.ar)} - {item.al.name}</span>
-                                    </div>
-                                </li>
-                            )
-                        })
-                    }
-                </SongItem>
-            </SongList>
-        )
+        <SongsList
+          songs={currentAlbum.tracks}
+          collectCount={currentAlbum.subscribedCount}
+          showCollect={true}
+          musicAnimation={musicAnimation}
+          showBackground={true}
+        />
+      )
     }
 
     return (
