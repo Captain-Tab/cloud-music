@@ -76,3 +76,34 @@ export const fetchLyricRequest = <T>(id: string) => {
         params: { id }
     })
 }
+
+// 获取搜索热词
+export const fetchHotKeyWordsRequest = <T>() => {
+    return request<T>({
+        url: '/search/hot',
+    })
+};
+
+// 获取推荐列表
+export const fetchSuggestListRequest = <T>(query: any) => {
+    return request<T>({
+        url: '/search/suggest',
+        params: { keywords: query }
+    })
+};
+
+// 获取搜索结果
+export const fetchResultSongsListRequest = <T>(query: any) => {
+    return request<T>({
+        url: '/search',
+        params: { keywords: query }
+    })
+};
+
+// 获取歌曲详情
+export const fetchSongDetailRequest = <T>(id: string) => {
+    return request<T>({
+        url: '/song/detail',
+        params: { ids: id }
+    })
+};

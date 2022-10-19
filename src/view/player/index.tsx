@@ -134,6 +134,10 @@ const Player = (props: any) => {
     if (currentLyric.current) {
       currentLyric.current.stop();
     }
+    // 避免songReady恒为false的情况
+    setTimeout(() => {
+      songReady.current = true;
+    }, 3000);
     try {
       const data: any = await fetchLyricRequest(id)
       lyric = data.lrc.lyric;
@@ -146,7 +150,7 @@ const Player = (props: any) => {
       currentLineNum.current = 0;
       currentLyric.current.seek(0);
     } catch (error) {
-      console.log('error', error)
+      console.warn('error', error)
       songReady.current = true
       audioRef.current.play();
     }
@@ -171,6 +175,7 @@ const Player = (props: any) => {
   // 异常处理
   const handleError = () => {
     console.warn('播放出错')
+    handleNext();
   }
 
   // 一首歌循环

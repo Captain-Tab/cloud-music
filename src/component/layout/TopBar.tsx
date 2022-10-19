@@ -29,7 +29,9 @@ const TopBar = (props: Iprops) :JSX.Element =>  {
                 <TopContent>
                     <Index className={'customIcon'} type={'menu'}/>
                     <span>Red Bean Ice</span>
-                    <Index className={'customIcon'} type={'search'} />
+                    <NavLink to={'/search'}>
+                      <Index className={'customIcon'} type={'search'} />
+                    </NavLink>
                 </TopContent>
 
                 <Tab>

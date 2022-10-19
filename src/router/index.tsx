@@ -6,6 +6,7 @@ import Rank from "../view/rank"
 import Album from "../view/album";
 import TopBar from "../component/layout/TopBar";
 import Artist from "../view/artist";
+import Search from "../view/search";
 
 const withLayout = (page: React.ReactElement) =>{
     return <TopBar>{page}</TopBar>
@@ -23,6 +24,10 @@ export default function Router () {
         },
         { path: '/rank', element: withLayout(<Rank />),
             children: [ { path: ':id', element: <Album /> } ]
+        },
+        {
+            path: '/search', element: withLayout(<Search />),
+            children: [{ path: ':id', element: <Search /> }]
         },
         // ...
     ])

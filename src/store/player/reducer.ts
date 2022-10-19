@@ -8,7 +8,6 @@ const handleInsertSong = (state: any, song: any) => {
   const sequenceList = JSON.parse(JSON.stringify(state.get('sequencePlayList').toJS()));
   let currentIndex = state.get('currentIndex');
   //看看有没有同款
-  console.log(song)
   const fpIndex = findIndex(song, playList);
   // 如果是当前歌曲直接不处理
   if(fpIndex === currentIndex && currentIndex !== -1) return state;
@@ -47,7 +46,6 @@ const handleInsertSong = (state: any, song: any) => {
   });
 }
 
-
 const handleDeleteSong = (state: any, song: any) => {
   //也可用loadsh库的deepClone方法。这里深拷贝是基于纯函数的考虑，不对参数state做修改
   const playList = JSON.parse(JSON.stringify(state.get('playList').toJS()));
@@ -77,7 +75,7 @@ const defaultState = fromJS({
   sequencePlayList: [], //顺序列表(因为之后会有随机模式，列表会乱序，因从拿这个保存顺序列表)
   playList: [],
   mode: playMode.sequence,//播放模式
-  currentIndex: 0,//当前歌曲在播放列表的索引位置
+  currentIndex: -1,//当前歌曲在播放列表的索引位置
   showPlayList: false,//是否展示播放列表
   currentSong: {} 
 });
@@ -102,6 +100,8 @@ export default (state: any = defaultState, action: any) => {
       return state.set('showPlayList', action.data);
     case actionTypes.DELETE_SONG:
       return handleDeleteSong(state, action.data);
+    case actionTypes.INSERT_SONG:
+      return handleInsertSong(state, action.data);
     default:
       return state;
   }

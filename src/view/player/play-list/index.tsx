@@ -117,8 +117,13 @@ const PlayList = (props: IProps): JSX.Element => {
     }
     return (
       <div>
-        <Icon type={iconName} color={'#xe6e1'} onClick={()=> changeMode()} />
-        <span className="text" onClick={() => changeMode()}>{text}</span>
+        <Icon type={iconName}
+          color={'#xe6e1'} 
+          onClick={() => changeMode()} />
+        <span className="text"
+          onClick={() => changeMode()}>
+          {text}
+        </span>
       </div>
     )
   };

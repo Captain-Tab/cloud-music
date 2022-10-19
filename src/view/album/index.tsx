@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useRef, useState} from "react"
 import styled from "styled-components"
 import { CSSTransition } from 'react-transition-group'
 import { useNavigate, useParams } from "react-router"
-import { noWrap } from '../../const/global-style'
 import Header from "../../component/common/header";
 import { getCount, isEmptyObject } from "../../utils";
 import Icon from "../../component/common/icon";
@@ -19,7 +18,6 @@ interface ITopDesc {
 }
 
 const Album = (props: any) => {
-  
     const [showStatus, setShowStatus] = useState(true)
     const [title, setTitle] = useState("歌单")
     const { currentAlbum: currentAlbumImmutable, enterLoading, getAlbumDataDispatch } = props;
@@ -308,102 +306,6 @@ const Menu = styled.div`
     font-weight: 500;
     .iconfont {
       font-size: 20px;
-    }
-  }
-    `
-
-const SongList = styled.div`
-  border-radius: 10px;
-  opacity: 0.98;
-  background: ${props => props.theme.highlightBkColor};
-  .first_line{
-    box-sizing: border-box;
-    padding: 10px 0;
-    margin-left: 10px;
-    position: relative;
-    justify-content: space-between;
-    border-bottom: 1px solid ${props => props.theme.borderColor};
-    .play_all{
-      display: inline-block;
-      line-height: 24px;
-      color: ${props => props.theme.fontColorDesc};
-      .iconfont {
-        font-size: 24px;
-        margin-right: 10px;
-        vertical-align: top;
-      }
-      .sum{
-        font-size: ${props => props.theme.fontsizes};
-        color: ${props => props.theme.fontColorDesc2};
-      }
-      >span{
-        vertical-align: top;
-      }
-    }
-    .add_list,.isCollected {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      right: 0;
-      top :0; 
-      bottom: 0;
-      width: 130px;
-      line-height: 34px;
-      background: ${props => props.theme.color};
-      color: ${props => props.theme.fontColorLight};
-      font-size: 0;
-      border-radius: 3px;
-      vertical-align: top;
-      .iconfont {
-        vertical-align: top;
-        font-size: 10px;
-        margin: 0 5px 0 10px;
-      }
-      span{
-        font-size: 14px;
-        line-height: 34px;
-      }
-    }
-    .isCollected{
-      display: flex;
-      background: ${props => props.theme.backgroundColor};
-      color: ${props => props.theme.fontColorDesc};
-    }
-}
-`
-
-const SongItem = styled.ul`
-  >li{
-    display: flex;
-    height: 60px;
-    align-items: center;  
-    .index{
-      flex-basis: 60px;
-      width: 60px;
-      height: 60px;
-      line-height: 60px;
-      text-align: center;
-    }
-    .info{
-      box-sizing: border-box;
-      flex: 1;
-      display: flex;
-      height: 100%;
-      padding: 5px 0;
-      flex-direction: column;
-      justify-content: space-around;
-      border-bottom: 1px solid ${props => props.theme.borderColor};
-      ${noWrap()}
-      >span{
-        ${noWrap()}
-      }
-      >span:first-child{
-        color: ${props => props.theme.fontColorDesc};
-      }
-      >span:last-child{
-        font-size: ${props => props.theme.fontsizes};
-        color: #bba8a8;
-      }
     }
   }
 `

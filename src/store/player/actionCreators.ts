@@ -7,9 +7,11 @@ import {
   SET_PLAY_MODE,
   SET_CURRENT_INDEX,
   SET_SHOW_PLAYLIST,
-  DELETE_SONG
+  DELETE_SONG,
+  INSERT_SONG
 } from './constants';
 import { fromJS } from 'immutable';
+import { fetchSongDetailRequest } from '../../fetch'
 
 export const changeCurrentSong = (data: any) => ({
   type: SET_CURRENT_SONG,
@@ -51,20 +53,19 @@ export const changeShowPlayList = (data: any) => ({
   data
 });
 
-// export const insertSong = (data: any) => ({
-//   type: INSERT_SONG,
-//   data
-// });
+export const getSongDetail = (id: string) => {
+  return (dispatch: any) => {
+    fetchSongDetailRequest(id).then((data: any) => {
+      const song = data.songs[0];
+      dispatch(insertSong(song));
+    })
+  }
+}
 
-// export const getSongDetail = (id: string) => {
-//   return (dispatch: any) => {
-//     getSongDetailRequest(id).then((data: any) => {
-//       const song = data.songs[0];
-//       console.log(song);
-//       dispatch(insertSong(song));
-//     })
-//   }
-// }
+export const insertSong = (data: any) => ({
+  type: INSERT_SONG,
+  data
+});
 
 export const deleteSong = (data: any) => ({
   type: DELETE_SONG,
